@@ -16,8 +16,6 @@ if __name__ == '__main__':
     scope = 'playlist-modify-public'
     sp = spotipy.Spotify(auth_manager=SpotifyOAuth(scope=scope))
 
-    all_track_ids = []
-
     playlists = sp.current_user_playlists()
     user_id = sp.me()['id']
 
@@ -31,12 +29,7 @@ if __name__ == '__main__':
         tracks = sp.next(tracks)
         tracks_to_exclude.extend(show_tracks(tracks))
 
-    all_track_ids.extend(show_tracks(tracks))
-    while tracks['next']:
-        tracks = sp.next(tracks)
-        all_track_ids.extend(show_tracks(tracks))
-
-
+    all_track_ids = []
     for playlist in playlists['items']:
         if playlist['name'] != 'Everything':
             if playlist['owner']['id'] == user_id:
@@ -49,7 +42,9 @@ if __name__ == '__main__':
                     all_track_ids.extend(show_tracks(tracks))
 
     all_track_ids = list(set(all_track_ids).difference(set(tracks_to_exclude)))
-    sp.playlist_add_items(everything_playlist['id'], all_track_ids)
+    print(len(all_track_ids), "songs to add")
+    if len(all_track_ids) > 0:
+        sp.playlist_add_items(everything_playlist['id'], all_track_ids)
 
 
 
