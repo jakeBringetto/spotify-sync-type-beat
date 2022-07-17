@@ -1,7 +1,8 @@
 # Shows a user's playlists (need to be authenticated via oauth)
-
+from dotenv import load_dotenv
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
+
 
 def show_tracks(results):
     curr_tracklist = []
@@ -13,6 +14,7 @@ def show_tracks(results):
 
 
 if __name__ == '__main__':
+    load_dotenv()
     scope = 'playlist-modify-public'
     sp = spotipy.Spotify(auth_manager=SpotifyOAuth(scope=scope))
 
