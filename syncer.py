@@ -11,16 +11,13 @@ def show_tracks(results):
         curr_tracklist.append(track['id'])
     return curr_tracklist
         
-
-
 if __name__ == '__main__':
     load_dotenv()
     scope = 'playlist-modify-public'
-    sp = spotipy.Spotify(auth_manager=SpotifyOAuth(scope=scope))
+    sp = spotipy.Spotify(auth_manager=SpotifyOAuth(scope=scope), requests_timeout=10)
 
     playlists = sp.current_user_playlists()
     user_id = sp.me()['id']
-
     everything_playlist = [playlist for playlist in playlists['items'] if playlist['name'] == 'Everything'][0]
     results = sp.playlist(everything_playlist['id'], fields="tracks,next")
     tracks = results['tracks']
