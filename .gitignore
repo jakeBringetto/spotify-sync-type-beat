@@ -1,2 +1,4 @@
 .cache
 .env
+.DS_Store
+vim.py
