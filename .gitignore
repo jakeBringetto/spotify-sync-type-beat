@@ -4,3 +4,4 @@
 vim.py
 data.csv
 labels.csv
+__pycache__/

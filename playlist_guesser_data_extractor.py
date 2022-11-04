@@ -6,7 +6,7 @@ from numpy import asarray
 from numpy import savetxt
 import csv
 
-def extract_track_features(results):
+def extract_track_features(sp, results):
     curr_tracklist = []
     for i, item in enumerate(results['items']):
         track = item['track']
@@ -54,10 +54,10 @@ def extract():
             tracks = results['tracks']
 
             track_features = []
-            track_features.extend(extract_track_features(tracks))
+            track_features.extend(extract_track_features(sp, tracks))
             while tracks['next']:
                 tracks = sp.next(tracks)
-                track_features.extend(extract_track_features(tracks))
+                track_features.extend(extract_track_features(sp, tracks))
 
             track_data = []
             for track in track_features:
