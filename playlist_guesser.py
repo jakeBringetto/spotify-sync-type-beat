@@ -3,6 +3,8 @@ from dotenv import load_dotenv
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 import numpy as np
+import sys
+import playlist_guesser_data_extractor
 
 def extract_track_features(results):
     curr_tracklist = []
@@ -36,30 +38,6 @@ if __name__ == '__main__':
     load_dotenv()
     scope = 'playlist-modify-public'
     sp = spotipy.Spotify(auth_manager=SpotifyOAuth(scope=scope))
-    playlists = sp.current_user_playlists()
-    user_id = sp.me()['id']
-
-    all_track_data = []
-    for playlist in playlists['items']:
-        name = playlist['name']
-
-        results = sp.playlist(playlist['id'], fields="tracks,next")
-        tracks = results['tracks']
-
-        track_features = []
-        track_features.extend(extract_track_features(tracks))
-        while tracks['next']:
-            tracks = sp.next(tracks)
-            track_features.extend(extract_track_features(tracks))
-
-        track_data = []
-        for track in track_features:
-            data = formulate_feature_data(track)
-            if data:
-                track_data.append(data)
-        if len(track_data) > 0:
-            all_track_data.extend(track_data)
-
-    all_track_data = np.array(all_track_data)
-    print(all_track_data.shape())
+    if len(sys.argv) > 1 and sys.argv[1] == 'extract':
+        playlist_guesser_data_extractor.extract()
     

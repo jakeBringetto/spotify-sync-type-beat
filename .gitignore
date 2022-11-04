@@ -2,3 +2,5 @@
 .env
 .DS_Store
 vim.py
+data.csv
+labels.csv
