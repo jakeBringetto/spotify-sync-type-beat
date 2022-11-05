@@ -59,7 +59,7 @@ if __name__ == '__main__':
 
     all_track_data, all_track_labels = get_data()
     depth = 15
-    estimators = 100
+    estimators = 80
     model = RandomForestClassifier(max_depth=depth, n_estimators=estimators, criterion='entropy', max_features='sqrt')
     model.fit(all_track_data, np.ravel(all_track_labels))
     tracks, track_features = get_tracks()
