@@ -58,7 +58,7 @@ if __name__ == '__main__':
         pl.extract()
 
     all_track_data, all_track_labels = get_data()
-    depth = 10
+    depth = 15
     estimators = 100
     model = RandomForestClassifier(max_depth=depth, n_estimators=estimators, criterion='entropy', max_features='sqrt')
     model.fit(all_track_data, np.ravel(all_track_labels))
