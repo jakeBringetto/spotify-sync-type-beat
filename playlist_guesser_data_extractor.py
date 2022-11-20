@@ -26,9 +26,10 @@ def formulate_feature_data(track):
         liveness = track['liveness']
         valence = track['valence']
         tempo = track['tempo']
+        time_signature = track['time_signature']
 
         track_data = [acousticness, danceability, energy, key, loudness, 
-        speechiness, instrumentalness, liveness, valence, tempo]
+        speechiness, instrumentalness, liveness, valence, tempo, time_signature]
 
         return track_data
     else:
@@ -41,7 +42,7 @@ def save(data, labels):
         label_writer.writerow(labels)
         
 
-def extract():
+def extract(sp):
     playlists = sp.current_user_playlists()
     user_id = sp.me()['id']
 
@@ -76,4 +77,4 @@ if __name__ == '__main__':
     load_dotenv()
     scope = 'playlist-modify-public'
     sp = spotipy.Spotify(auth_manager=SpotifyOAuth(scope=scope))
-    extract()
+    extract(sp)

@@ -3,7 +3,7 @@
 # Script Descriptions
 * `syncer.py`
     * This script takes all songs from various playlists and adds them to 'Everything', which is a playlist consisting of all unique songs from all playlists. Since spotify added a feature to select multiple playlists when adding songs, it kinda defeats the purpose, but it's still fun to run the script.
-* `playlist_guesser_dt.py`
+* `playlist_guesser.py`
    * This script (still in development) is aiming to train a classification model so that given a new song, the model can 'predict' which playlist the song belongs in. This particular classifier is a random forest.
 * `playlist_guesser_tester.ipynb`
     * Notebook meant for doing some testing before running the `playlist_guesser` script (because it takes a long time). I can test for bugs with a subset of the dataset and when it works in the tester, I can run the guesser script with the whole dataset.
@@ -20,7 +20,7 @@ Simply run `python3 syncer.py` in the directory with the file. It will open a pr
 ### Guessing
 Run `python3 extractor.py` to create and store data/label arrays.
 
-Then, run `python3 playlist_guesser_dt.py` to guess playlist for song.
+Then, run `python3 playlist_guesser.py <model>` to guess playlist for song, where model is one of {`dt`}
 
-Additionally, to avoid having to run two scripts, run `python3 playlist_guesser_dt.py extract` to first extract then predict.
+Additionally, to avoid having to run two scripts, run `python3 playlist_guesser_dt.py model extract` to first extract then predict.
 

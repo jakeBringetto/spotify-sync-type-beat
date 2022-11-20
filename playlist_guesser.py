@@ -46,17 +46,7 @@ def get_tracks():
     final_tracks = [sp.track(track['id'])['name'] for track in final_tracks]
     return final_tracks, np.array(final_track_features)
 
-
-if __name__ == '__main__':
-    load_dotenv()
-    scope = 'playlist-modify-public'
-    sp = spotipy.Spotify(auth_manager=SpotifyOAuth(scope=scope))
-    playlists = sp.current_user_playlists()
-    user_id = sp.me()['id']
-
-    if len(sys.argv) > 1 and sys.argv[1] == 'extract':
-        pl.extract()
-
+def dt_model():
     all_track_data, all_track_labels = get_data()
     depth = 15
     estimators = 80
@@ -66,3 +56,18 @@ if __name__ == '__main__':
     track_predictions = model.predict(track_features)
     for i in range(len(tracks)):
         print("Track:", tracks[i], "Prediction:", track_predictions[i])
+
+if __name__ == '__main__':
+    load_dotenv()
+    scope = 'playlist-modify-public'
+    sp = spotipy.Spotify(auth_manager=SpotifyOAuth(scope=scope))
+    playlists = sp.current_user_playlists()
+    user_id = sp.me()['id']
+
+    if len(sys.argv) > 2 and sys.argv[2] == 'extract':
+        pl.extract(sp)
+    
+    if len(sys.argv) > 1 and sys.argv[1] == 'dt':
+        dt_model()
+    else:
+        print("please specify classification model")
