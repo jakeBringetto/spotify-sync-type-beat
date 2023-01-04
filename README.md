@@ -23,3 +23,7 @@ Then, run `python3 playlist_guesser.py <model>` to guess playlist for song, wher
 
 Additionally, to avoid having to run two scripts, run `python3 playlist_guesser_dt.py model extract` to first extract then predict.
 
+# Future work (to do)
+As of now the code is essentially only able to run with my settings. I will make it more accessible in the future. At the moment, anyone wanting to use the code needs to have their own environment variables configured for the spotipy client. Additionally, certain playlist names are hardcoded into the scripts, so users without the same playlist names will need to create those playlists first (i.e. bot_test and everything)
+
+
