@@ -24,6 +24,17 @@ Then, run `python3 playlist_guesser.py <model>` to guess playlist for song, wher
 Additionally, to avoid having to run two scripts, run `python3 playlist_guesser_dt.py model extract` to first extract then predict.
 
 # Future work (to do)
+
+
+### Usability task
 As of now the code is essentially only able to run with my settings. I will make it more accessible in the future. At the moment, anyone wanting to use the code needs to have their own environment variables configured for the spotipy client. Additionally, certain playlist names are hardcoded into the scripts, so users without the same playlist names will need to create those playlists first (i.e. bot_test and everything)
 
+### New classifiers task
+As of now the only classifier implemented is a random forrest classifier using shallow decision trees. I'd like to expreriment with other classifiers such as multiclass SVD, guassian descriminante analysis, etc.
+
+### Autoencoder
+For classification, I only have access to a small dataset (my playlists). In the future I'd like to make use of other user's created playlists perhaps to pretrain using an autoencoder. I could then fine tune with my dataset with a task specific head (standard autoencoder doctrine tbhhh).
+
+### Map task
+Take other people's data and create a visualization of related music between users and the sort, tbd. This may also be an oppurtunity to host on AWS and implement some sort of database into the project to store others data. Rn the "database" is a primitive CV file that is read at training and inference.
 
