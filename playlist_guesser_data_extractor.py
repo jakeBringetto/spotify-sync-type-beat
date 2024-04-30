@@ -50,7 +50,7 @@ def extract(sp):
     all_track_labels = []
     for playlist in playlists['items']:
         name = playlist['name']
-        if name != "Everything" and name != "Bot Test" and playlist['owner']['id'] == user_id:
+        if name != "Everything" and name != "Bot Test Dataset" and playlist['owner']['id'] == user_id:
             results = sp.playlist(playlist['id'], fields="tracks,next")
             tracks = results['tracks']
 

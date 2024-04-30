@@ -25,7 +25,7 @@ def get_tracks():
     final_track_features = []
     for playlist in playlists['items']:
         name = playlist['name']
-        if name == "Bot Test" and playlist['owner']['id'] == user_id:
+        if name == "Bot Test Dataset" and playlist['owner']['id'] == user_id:
             results = sp.playlist(playlist['id'], fields="tracks,next")
             tracks = results['tracks']
 
@@ -53,6 +53,7 @@ def dt_model():
     model = RandomForestClassifier(max_depth=depth, n_estimators=estimators, criterion='entropy', max_features='sqrt')
     model.fit(all_track_data, np.ravel(all_track_labels))
     tracks, track_features = get_tracks()
+    track_features.reshape(-1, 1)
     track_predictions = model.predict(track_features)
     for i in range(len(tracks)):
         print("Track:", tracks[i], "Prediction:", track_predictions[i])
